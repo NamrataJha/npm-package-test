@@ -17,4 +17,4 @@ jobs:
             repo: npm-package-test
             package-name: npm-package-test
             min-versions-to-keep: 3
-            num-old-versions-to-delete: 0
+            num-old-versions-to-delete: 2
