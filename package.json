@@ -1,6 +1,6 @@
 {
   "name": "@namratajha/npm-package-test",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A package to test github npm package registry",
   "main": "index.js",
   "scripts": {
