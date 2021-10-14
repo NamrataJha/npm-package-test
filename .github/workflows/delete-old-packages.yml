@@ -11,7 +11,7 @@ jobs:
     
     steps:
       - name: Delete maven package
-        uses: NamrataJha/delete-package-versions@29f8472f2738555b640cd6d5554d057687ec2fa8
+        uses: NamrataJha/delete-package-versions@60111e0b966f49106c84f9a20a52aa4f778b1398
         with: 
             owner: NamrataJha
             repo: npm-package-test
