@@ -1,0 +1,40 @@
+on: [push, repository_dispatch, workflow_dispatch]
+
+env:
+  TARGET_PACKAGE: "@namratajha/npm-package-test"
+
+jobs:
+
+  create-and-install:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        registry: ["@namratajha:registry=https://npm.pkg.github.com", "registry=https://npm.pkg.github.com/namratajha"]
+
+    steps:
+      - uses: actions/setup-node@v1
+
+      - run: |
+          echo '//npm.pkg.github.com/:_authToken=${{ github.token }}
+          ${{ matrix.registry }}' > .npmrc
+
+      - name: Create a package called @${{ github.repository }}
+        run: npm init --scope ${{ github.repository_owner }} -y
+
+      - name: Add index.js to package
+        run: echo 'require("${{ env.TARGET_PACKAGE }}").sayHello()' > index.js
+
+      - name: Install a package
+        run: npm install ${{ env.TARGET_PACKAGE }}
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
+
+      - name: Install an unscoped package
+        run: npm install ping
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
+
+      - name: Execute package
+        run: npx .
