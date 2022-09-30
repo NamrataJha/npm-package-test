@@ -1,6 +1,6 @@
 name: publish-package
 on:
-  workflow_dispatch:ˇ
+  workflow_dispatch:
   
 jobs:
   compare_versions:
