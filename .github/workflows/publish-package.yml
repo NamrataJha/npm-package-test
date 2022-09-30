@@ -20,6 +20,9 @@ jobs:
       - name: setup-npmrc
         id: setup-npmrc
         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+        
+      - name: npm view
+        run: npm view
 
       - name: Publish package
         run: npm publish
