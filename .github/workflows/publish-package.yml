@@ -11,15 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: actions/setup-node@v3
-        with: 
-          node-version: 16
-          registry-url: https://npm.pkg.github.com
-          token: ${{ secrets.GITHUB_TOKEN }}
+#       - uses: actions/setup-node@v3
+#         with: 
+#           node-version: 16
+#           registry-url: https://npm.pkg.github.com
+#           token: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: setup-npmrc
-        id: setup-npmrc
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+#       - name: setup-npmrc
+#         id: setup-npmrc
+#         run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
+
+      - name: set authToken
+        run: |
+              npm config set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+              npm config set @npm:registry=https://npm.pkg.github.com/ 
+
         
       - name: npm view
         run: npm view
